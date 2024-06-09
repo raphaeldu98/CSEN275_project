@@ -2,128 +2,92 @@ package com.example.gardenproject;
 
 import java.util.List;
 
-class Plant {
-    private String name;
-    private int waterRequirement;
-    private List<String> parasites;
-    private int currentWaterLevel;
-    private boolean alive;
-    private String infestingPest;
-    private boolean needsFertilizer;
-    private String neededFertilizer;
-    private int hoursWithoutWater;
-    private int hoursWithPest;
-    private String status;
-
-    public Plant(String name, int waterRequirement, List<String> parasites, String neededFertilizer) {
-        this.name = name;
-        this.waterRequirement = waterRequirement;
-        this.parasites = parasites;
-        this.currentWaterLevel = 0;
-        this.alive = true;
-        this.infestingPest = null;
-        this.needsFertilizer = true;
-        this.neededFertilizer = neededFertilizer;
-        this.hoursWithoutWater = 0;
-        this.hoursWithPest = 0;
-        this.status = "seed"; // Initially, the plant is in "seed" status
+public class Plant {
+    public String alert_msg;
+    public String log_msg;
+    public String plant_type;
+    public int health;
+    public int water;
+    public Pest pest;
+    public int fertilizer_type;
+    public int fertilizer_level;
+    public Plant(String plant_type, int fertilizer_type) {
+        this.plant_type = plant_type;
+        health = 5;
+        water = 0;
+        pest = null;
+        this.fertilizer_type = fertilizer_type;
+        fertilizer_level = 0;
     }
+    public void command(int command_id){
+        if(command_id>=2 && command_id<=4){
+            command_id-=2;
 
-    public String getName() {
-        return name;
-    }
-
-    public int getWaterRequirement() {
-        return waterRequirement;
-    }
-
-    public List<String> getParasites() {
-        return parasites;
-    }
-
-    public boolean needsWater() {
-        return currentWaterLevel < waterRequirement;
-    }
-
-    public boolean needsFertilizer() {
-        return needsFertilizer;
-    }
-
-    public String getNeededFertilizer() {
-        return neededFertilizer;
-    }
-
-    public boolean isInfested() {
-        return infestingPest != null;
-    }
-
-    public String getInfestingPest() {
-        return infestingPest;
-    }
-
-    public boolean isAlive() {
-        return alive;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void water(int amount) {
-        if (alive) {
-            currentWaterLevel += amount;
-            if (currentWaterLevel > waterRequirement) {
-                currentWaterLevel = waterRequirement; // prevent overwatering
-            }
-            hoursWithoutWater = 0; // reset hours without water
+        }else if(command_id>=5 && command_id<=7){
+            command_id -= 5;
+        }else{
+            water += 2+SystemAPI.water_change;
         }
     }
+    public void update_alert_msg(){
 
-    public void adjustTemperature(int temp) {
-        // Add temperature handling logic
     }
-
-    public void infestedBy(String parasite) {
-        if (parasites.contains(parasite)) {
-            infestingPest = parasite;
+    public String end_of_Day(){
+        if(health==0) return "Plant is dead.";
+        StringBuffer ret = new StringBuffer();
+        boolean healthy_flag = true;
+        water-=1+SystemAPI.water_change;
+        fertilizer_level--;
+        ret.append("Plant "+plant_type+"\n");
+        ret.append("Plant current water level is "+water+".\n");
+        if(water<0){
+            ret.append("Plant is drying out.\n");
+            health--;
+            healthy_flag = false;
+        }else if(water>3){
+            ret.append("Plant is drowning.\n");
+            health--;
+            healthy_flag = true;
         }
+        ret.append("Plant current fertilizer level is "+fertilizer_level+".\n");
+        if(fertilizer_level<0){
+            ret.append("Plant is under fertilized.\n");
+            health--;
+            healthy_flag = false;
+        }else if(fertilizer_level>3){
+            ret.append("Plant is over fertilized.\n");
+            health--;
+            healthy_flag = false;
+        }
+        if(pest!=null){
+            ret.append("Plant is affected by "+pest.Pest_type+".\n");
+            health--;
+            healthy_flag = false;
+        }
+        if(healthy_flag){
+            ret.append("Plant is currently very healthy.\n");
+            health++;
+        }
+        ret.append("Plant current HP is: "+health+".\n");
+
+        return ret.toString();
     }
+}
 
-    public void applyFertilizer(String type) {
-        if (alive && type.equals(neededFertilizer)) {
-            needsFertilizer = false;
-            status = "plant";
-        }
+class SunFlower extends Plant {
+    public SunFlower() {
+        super("SunFlower", 0);
     }
+}
 
-    public void applyPestControl(String pest) {
-        if (parasites.contains(pest)) {
-            infestingPest = null;
-            hoursWithPest = 0; // reset hours with pest
-        }
+class Rose extends Plant {
+    public Rose() {
+        super("Rose", 1);
     }
+}
 
-    public void dailyUpdate() {
-        if (needsWater()) {
-            hoursWithoutWater++;
-            if (hoursWithoutWater > 24) {
-                alive = false;
-            }
-        } else {
-            hoursWithoutWater = 0;
-        }
-
-        if (isInfested()) {
-            hoursWithPest++;
-            if (hoursWithPest > 24) {
-                alive = false;
-            }
-        } else {
-            hoursWithPest = 0;
-        }
-    }
-
-    public void printStatus() {
-        System.out.println("Plant: " + name + ", Status: " + status + ", Alive: " + alive + ", Water Level: " + currentWaterLevel);
+class Tomato extends Plant {
+    public Tomato() {
+        super("Tomato", 2);
     }
 }
