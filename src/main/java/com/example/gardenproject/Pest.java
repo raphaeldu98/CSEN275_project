@@ -7,21 +7,28 @@ public class Pest {
         this.Pest_type = Pest_type;
         this.pest_killer_id = pest_killer_id;
     }
+    public boolean pesticide(int pest_killer_id){
+        if(this.pest_killer_id == pest_killer_id){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
-class Fly {
+class Fly extends Pest {
     public Fly(){
         super("Fly", 0);
     }
 }
 
-class Moth {
+class Moth extends Pest {
     public Moth(){
         super("Moth",1);
     }
 }
 
-class Spider {
+class Spider extends Pest {
     public Spider(){
         super("Spider",2);
     }

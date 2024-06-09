@@ -19,18 +19,53 @@ public class Plant {
         this.fertilizer_type = fertilizer_type;
         fertilizer_level = 0;
     }
-    public void command(int command_id){
+    public String command(int command_id){
+        String ret = null;
         if(command_id>=2 && command_id<=4){
             command_id-=2;
-
+            if(command_id==fertilizer_type) fertilizer_level+=2;
         }else if(command_id>=5 && command_id<=7){
             command_id -= 5;
+            if(pest!=null){
+                boolean flag = pest.pesticide(command_id);
+                if(flag){
+                    ret = pest.Pest_type +" successfully eliminated.";
+                    pest = null;
+                }else{
+                    ret = "Wrong pesticide used.";
+                }
+            }else{
+                ret = "There is no pest on this plant.";
+            }
         }else{
-            water += 2+SystemAPI.water_change;
+            water += 2;
+            ret = plant_type+" successfully watered.";
         }
+        update_alert_msg();
+        return ret;
     }
     public void update_alert_msg(){
-
+        StringBuffer msg = new StringBuffer();
+        if(water<=0) msg.append("Drying out!\n");
+        if(water>=3) msg.append("Drowning!\n");
+        if(fertilizer_level<=0){
+            switch (fertilizer_type) {
+                case 0:
+                    msg.append("N Fertilizer ");
+                    break;
+                case 1:
+                    msg.append("P Fertilizer ");
+                    break;
+                case 2:
+                    msg.append("K Fertilizer ");
+                default:
+                    break;
+            }
+            msg.append("needed!\n");
+        }
+        if(fertilizer_level>=3) msg.append("Over fertilized!");
+        if(pest != null) msg.append(pest.Pest_type + " attacking!");
+        alert_msg = msg.toString();
     }
     public String end_of_Day(){
         if(health==0) return "Plant is dead.";
