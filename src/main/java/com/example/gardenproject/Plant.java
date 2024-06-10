@@ -20,6 +20,7 @@ public class Plant {
     }
 
     public String command(int command_id, int x, int y) {
+        if(health==0) return plant_type + " at (" + x + "," + y + ") is already dead.";
         String ret = "";
         if (command_id >= 2 && command_id <= 4) {
             command_id -= 2;
@@ -51,6 +52,10 @@ public class Plant {
     }
 
     public void update_alert_msg() {
+        if(health==0){
+            alert_msg = "Dead.\n";
+            return;
+        }
         StringBuilder msg = new StringBuilder();
         if (water <= 0) msg.append("Drying out!\n");
         if (water >= 3) msg.append("Drowning!\n");
@@ -68,12 +73,12 @@ public class Plant {
             }
             msg.append("needed!\n");
         }
-        if (fertilizer_level >= 3) msg.append("Over fertilized!");
-        if (pest != null) msg.append(pest.Pest_type + " attacking!");
+        if (fertilizer_level >= 3) msg.append("Over fertilized!\n");
+        if (pest != null) msg.append(pest.Pest_type + " attacking!\n");
         alert_msg = msg.toString();
     }
 
-    public String end_of_Day(int x, int y) {
+    public String end_of_Day(int x, int y, StringBuffer pest_msg) {
         if (health == 0) return "Plant at (" + x + "," + y + ") is dead.";
         StringBuilder ret = new StringBuilder();
         boolean healthy_flag = true;
@@ -111,6 +116,27 @@ public class Plant {
         }
         ret.append("Plant current HP is: ").append(health).append(".\n");
 
+        if(pest==null){
+            if((int)(Math.random()*100.0) <= SystemAPI.pest_chance){
+                int Pest_type = (int)(Math.random()*3.0);
+                switch (Pest_type) {
+                    case 0:
+                        pest = new Fly();
+                        pest_msg.append("A Fly just flew onto the "+ plant_type + "at (" + x + "," + y + ").");
+                        break;
+                    case 1:
+                        pest = new Moth();
+                        pest_msg.append("A Moth just flew onto the "+ plant_type + "at (" + x + "," + y + ").");
+                        break;
+                    case 2:
+                        pest = new Spider();
+                        pest_msg.append("A Spider just climed onto the "+ plant_type + "at (" + x + "," + y + ").");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         return ret.toString();
     }
 }

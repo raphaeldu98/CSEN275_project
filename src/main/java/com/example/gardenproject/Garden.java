@@ -37,15 +37,17 @@ public class Garden implements Runnable {
         int action = command[2];
 
         if (x == 5 && y == 5 && action == 5) {
+            StringBuffer pest_msg = new StringBuffer();
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
                     if (garden[i][j] != null) {
-                        String endOfDayResult = garden[i][j].end_of_Day(i, j);
+                        String endOfDayResult = garden[i][j].end_of_Day(i, j, pest_msg);
                         logger.log(endOfDayResult);
                     }
                 }
             }
             SystemAPI.date++;
+            logger.log(pest_msg.toString());
             automationSystem();
             return "End of day processed.";
         } else if (x == -1 && y == -1 && action == -1) {
