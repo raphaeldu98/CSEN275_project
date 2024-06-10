@@ -116,7 +116,7 @@ public class Garden implements Runnable {
         mainLogger.log("Garden main method ended");
     }
 
-    private static void automationSystem() {
+    public static void automationSystem() {
         Logger logger = new Logger("garden.log");
         logger.log("Automation system running");
 

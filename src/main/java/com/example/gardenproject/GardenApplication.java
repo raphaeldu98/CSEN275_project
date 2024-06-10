@@ -3,7 +3,10 @@ package com.example.gardenproject;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.animation.AnimationTimer;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
@@ -15,14 +18,28 @@ public class GardenApplication extends Application {
         // Load the FXML content and get the root and controller
         Parent root = fxmlLoader.load();
         GardenController controller = fxmlLoader.getController();
+        controller.startController();
 
-        // Create the WorldUI instance and set the scene
-        WorldUI worldUI = new WorldUI(root, 800, 600);
+        // Get the StackPane from the FXML to add the WorldUI
+        StackPane gardenStackPane = (StackPane) fxmlLoader.getNamespace().get("gardenStackPane");
+
+        Scene scene = new Scene(root, 800, 600);
+        // Create the WorldUI instance
+        WorldUI worldUI = new WorldUI(scene, gardenStackPane);
         controller.setWorldUI(worldUI);
 
         stage.setTitle("Garden Project");
-        stage.setScene(worldUI.getScene());
+        stage.setScene(scene);
         stage.show();
+
+        // Periodically update the UI to reflect changes
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                worldUI.updateUI();
+            }
+        };
+        timer.start();
     }
 
     public static void main(String[] args) {
