@@ -39,7 +39,7 @@ public class WorldUI {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 Button button = new Button();
-                button.setOpacity(0); // Make button invisible
+                // button.setOpacity(0); // Make button invisible
                 final int x = i;
                 final int y = j;
                 button.setOnAction(e -> onGridButtonClick(x, y));
@@ -142,6 +142,7 @@ public class WorldUI {
     private void onGridButtonClick(int x, int y) {
         if (GardenController.lastCommand >= 0) {
             Garden.commands.add(new int[]{x, y, GardenController.lastCommand});
+            System.out.println("Adding command | x: " + x + ", y: " + y + ", command: " + GardenController.lastCommand);
             GardenController.lastCommand = -1; // Reset the last command
             updateUI();
         }
