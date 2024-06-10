@@ -1,6 +1,5 @@
 package com.example.gardenproject;
 
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,11 +17,10 @@ public class Logger {
 
     public void log(String message) {
         writer.println(message);
-        writer.flush();
+        writer.flush();  // Ensure immediate flush after each write
     }
 
     public void close() {
         writer.close();
     }
 }
-
