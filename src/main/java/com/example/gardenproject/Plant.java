@@ -124,15 +124,15 @@ public class Plant {
                 switch (Pest_type) {
                     case 0:
                         pest = new Fly();
-                        pest_msg.append("A Fly just flew onto the "+ plant_type + "at (" + x + "," + y + ").");
+                        pest_msg.append("A Fly just flew onto the "+ plant_type + " at (" + x + "," + y + ").\n");
                         break;
                     case 1:
                         pest = new Moth();
-                        pest_msg.append("A Moth just flew onto the "+ plant_type + "at (" + x + "," + y + ").");
+                        pest_msg.append("A Moth just flew onto the "+ plant_type + " at (" + x + "," + y + ").\n");
                         break;
                     case 2:
                         pest = new Spider();
-                        pest_msg.append("A Spider just climed onto the "+ plant_type + "at (" + x + "," + y + ").");
+                        pest_msg.append("A Spider just climbed onto the " + plant_type + " at (" + x + "," + y + ").\n");
                         break;
                     default:
                         break;
