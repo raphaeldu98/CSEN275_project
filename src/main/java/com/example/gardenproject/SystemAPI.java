@@ -10,7 +10,7 @@ public class SystemAPI {
     public static boolean automation = false;
     //pest_chance is the percentage chance a random pest will generate on a plant with no pest, 10 means 10%chance
     public static int pest_chance = 10;
-    //water_level should be one of the following three, "rain", "normal", or "drone", affecting the time interval plants require watering
+    //water_level should be one of the following three, "rain", "normal", or "drought", affecting the time interval plants require watering
     public static String water_level = "normal".toLowerCase();
-    public static int water_change = water_level.equals("normal")? 0 :water_level.equals("drone")?-1:1;
+    public static int water_change = water_level.equals("normal")? 0 :water_level.equals("drought")?-1:1;
 }
