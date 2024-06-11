@@ -12,6 +12,8 @@
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.example.gardenproject.GardenController">
     <VBox alignment="TOP_CENTER" spacing="10.0">
+        <Label fx:id="dayLabel" text="Day: 1" style="-fx-font-size: 20px;"/>
+        <Label fx:id="timerLabel" text="Time to next day: 0 seconds" style="-fx-font-size: 20px;"/>
         <HBox alignment="TOP_CENTER" spacing="10.0">
             <padding>
                 <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
@@ -40,8 +42,8 @@
 <!--            </VBox>-->
             <VBox>
                 <!-- Log area -->
-                <Label fx:id="dayLabel" text="Day: 1"/>
-                <Label fx:id="timerLabel" text="Time to next day: 0 seconds"/>
+<!--                <Label fx:id="dayLabel" text="Day: 1"/>-->
+<!--                <Label fx:id="timerLabel" text="Time to next day: 0 seconds"/>-->
                 <TextArea fx:id="logTextArea" editable="false" prefHeight="500" prefWidth="400"/>
 
             </VBox>
