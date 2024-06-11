@@ -54,7 +54,7 @@ public class Plant {
     }
 
     public void update_alert_msg() {
-        if(health==0){
+        if(health<=0){
             alert_msg = "Dead.\n";
             return;
         }
@@ -81,7 +81,7 @@ public class Plant {
     }
 
     public String end_of_Day(int x, int y, StringBuffer pest_msg) {
-        if (health == 0) return "Plant at (" + x + "," + y + ") is dead.";
+        if (health <= 0) return "Plant at (" + x + "," + y + ") is dead.";
         StringBuilder ret = new StringBuilder();
         boolean healthy_flag = true;
         water -= 1 + SystemAPI.water_change;
