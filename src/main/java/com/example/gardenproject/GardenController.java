@@ -1,8 +1,11 @@
 package com.example.gardenproject;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.StackPane;
+import javafx.animation.AnimationTimer;
 import java.util.Random;
 
 public class GardenController {
@@ -24,16 +27,23 @@ public class GardenController {
     private Button spiderKillerButton;
     @FXML
     private Button waterButton;
+    @FXML
+    private TextArea logTextArea;
+    @FXML
+    private StackPane gardenStackPane;
+    @FXML
+    private Label dayLabel;
+    @FXML
+    private Label timerLabel;
 
     private WorldUI worldUI;
+    static int lastCommand;
     private final Random random = new Random();
-    public static int lastCommand;
 
     public void startController() {
-        System.out.println("Starting Controller.");
+        Logger.setLogTextArea(logTextArea);
         Logger mainLogger = new Logger("garden.log");
         mainLogger.log("Garden main method started");
-        System.out.println("Logging Generated.");
 
         Garden.program_running_flag = true;
         Garden garden = new Garden();
@@ -43,8 +53,6 @@ public class GardenController {
 
         gardenThread.start();
         timerThread.start();
-
-        System.out.println("Threads started.");
 
         if (SystemAPI.automation) {
             Thread automationThread = new Thread(() -> {
@@ -61,6 +69,26 @@ public class GardenController {
         }
 
         mainLogger.log("Garden main method ended");
+
+        AnimationTimer uiUpdater = new AnimationTimer() {
+            private long lastUpdate = 0;
+            private long nextDayTime = System.currentTimeMillis() + (SystemAPI.day_length * 1000);
+
+            @Override
+            public void handle(long now) {
+                if (now - lastUpdate >= 1_000_000_000) { // update every second
+                    long remainingTime = (nextDayTime - System.currentTimeMillis()) / 1000;
+                    dayLabel.setText("Day: " + SystemAPI.date);
+                    timerLabel.setText("Time to next day: " + remainingTime + " seconds");
+                    lastUpdate = now;
+
+                    if (remainingTime <= 0) {
+                        nextDayTime = System.currentTimeMillis() + (SystemAPI.day_length * 1000);
+                    }
+                }
+            }
+        };
+        uiUpdater.start();
     }
 
     public void setWorldUI(WorldUI worldUI) {
@@ -114,11 +142,9 @@ public class GardenController {
 
     private void setLastCommand(int action) {
         lastCommand = action;
-        System.out.println("Last command set: " + action);
     }
 
     private void addCommand(int x, int y, int action) {
         Garden.commands.add(new int[]{x, y, action});
-        System.out.println("Command added: " + x + ", " + y + ", " + action);
     }
 }

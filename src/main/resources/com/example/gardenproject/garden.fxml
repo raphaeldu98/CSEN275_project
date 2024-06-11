@@ -4,7 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.example.gardenproject.GardenController">
@@ -23,8 +26,26 @@
             <Button text="Spider Killer" onAction="#onSpiderKillerButtonClick" fx:id="spiderKillerButton"/>
             <Button text="Water" onAction="#onWaterButtonClick" fx:id="waterButton"/>
         </HBox>
-        <StackPane fx:id="gardenStackPane" alignment="CENTER">
-            <!-- Placeholder for the Garden UI, this will be added dynamically -->
-        </StackPane>
+<!--        <StackPane fx:id="gardenStackPane" alignment="CENTER">-->
+<!--            &lt;!&ndash; Placeholder for the Garden UI, this will be added dynamically &ndash;&gt;-->
+<!--        </StackPane>-->
+        <HBox>
+<!--            <VBox spacing="10">-->
+<!--                <padding>-->
+<!--                    <Insets top="10" right="10" bottom="10" left="10"/>-->
+<!--                </padding>-->
+<!--                <Label fx:id="dayLabel" text="Day: 1"/>-->
+<!--                <Label fx:id="timerLabel" text="Time to next day: 0 seconds"/>-->
+<!--                &lt;!&ndash; Add other UI components here if needed &ndash;&gt;-->
+<!--            </VBox>-->
+            <VBox>
+                <!-- Log area -->
+                <Label fx:id="dayLabel" text="Day: 1"/>
+                <Label fx:id="timerLabel" text="Time to next day: 0 seconds"/>
+                <TextArea fx:id="logTextArea" editable="false" prefHeight="500" prefWidth="300"/>
+
+            </VBox>
+            <StackPane fx:id="gardenStackPane" prefHeight="600" prefWidth="600"/>
+        </HBox>
     </VBox>
 </StackPane>

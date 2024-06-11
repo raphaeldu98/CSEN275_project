@@ -18,13 +18,15 @@ public class GardenApplication extends Application {
         // Load the FXML content and get the root and controller
         Parent root = fxmlLoader.load();
         GardenController controller = fxmlLoader.getController();
+
+        // Start the controller
         controller.startController();
 
         // Get the StackPane from the FXML to add the WorldUI
         StackPane gardenStackPane = (StackPane) fxmlLoader.getNamespace().get("gardenStackPane");
 
+        // Create the scene and the WorldUI
         Scene scene = new Scene(root, 800, 600);
-        // Create the WorldUI instance
         WorldUI worldUI = new WorldUI(scene, gardenStackPane);
         controller.setWorldUI(worldUI);
 

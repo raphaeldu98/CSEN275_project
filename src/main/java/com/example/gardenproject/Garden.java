@@ -48,7 +48,7 @@ public class Garden implements Runnable {
             }
             SystemAPI.date++;
             logger.log(pest_msg.toString());
-            automationSystem();
+            //automationSystem();
             return "End of day processed.";
         } else if (x == -1 && y == -1 && action == -1) {
             program_running_flag = false;
@@ -99,19 +99,19 @@ public class Garden implements Runnable {
         gardenThread.start();
         timerThread.start();
 
-        if (SystemAPI.automation) {
-            Thread automationThread = new Thread(() -> {
-                while (Garden.program_running_flag) {
-                    automationSystem();
-                    try {
-                        Thread.sleep(1000  * SystemAPI.day_length);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            automationThread.start();
-        }
+//        if (SystemAPI.automation) {
+//            Thread automationThread = new Thread(() -> {
+//                while (Garden.program_running_flag) {
+//                    automationSystem();
+//                    try {
+//                        Thread.sleep(1000  * SystemAPI.day_length);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//            automationThread.start();
+//        }
 
         mainLogger.log("Garden main method ended");
     }
@@ -143,7 +143,7 @@ public class Garden implements Runnable {
                     }
                 } else {
                     // Randomly generate plant on empty grid
-                    if (new Random().nextInt(100) < 20) { // 20% chance to plant a new one
+                    if (new Random().nextInt(100) < 10) { // 10% chance to plant a new one
                         commands.add(new int[]{i, j, 0});
                         logger.log("Added command to plant a new plant at " + i + "," + j);
                     }
@@ -164,7 +164,7 @@ class Day_Pass_Timer implements Runnable {
             while (Garden.program_running_flag) {
                 Thread.sleep(1000 * SystemAPI.day_length);
                 Garden.commands.add(new int[]{5, 5, 5});
-                logger.log("Added end-of-day command to queue");
+                //logger.log("Added end-of-day command to queue");
             }
         } catch (Exception e) {
             logger.log("Error: " + e.getMessage());
