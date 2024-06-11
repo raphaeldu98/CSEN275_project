@@ -38,6 +38,8 @@ public class WorldUI {
             for (int j = 0; j < GRID_SIZE; j++) {
                 Button button = new Button();
                 // button.setOpacity(0); // Make button invisible
+                button.setPrefWidth(21);
+                button.setPrefHeight(20);
                 final int x = i;
                 final int y = j;
                 button.setOnAction(e -> onGridButtonClick(x, y));
