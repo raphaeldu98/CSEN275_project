@@ -9,6 +9,7 @@ public class Plant {
     public Pest pest;
     public int fertilizer_type;
     public int fertilizer_level;
+    public String flowerImage;
 
     public Plant(String plant_type, int fertilizer_type) {
         this.plant_type = plant_type;
@@ -17,6 +18,7 @@ public class Plant {
         pest = null;
         this.fertilizer_type = fertilizer_type;
         fertilizer_level = 0;
+        flowerImage = "sunflower.png";
     }
 
     public String command(int command_id, int x, int y) {
@@ -144,17 +146,20 @@ public class Plant {
 class SunFlower extends Plant {
     public SunFlower() {
         super("SunFlower", 0);
+        this.flowerImage = "sunflower.png";
     }
 }
 
 class Rose extends Plant {
     public Rose() {
         super("Rose", 1);
+        this.flowerImage = "rose.png";
     }
 }
 
 class Tomato extends Plant {
     public Tomato() {
         super("Tomato", 2);
+        this.flowerImage = "tomato.png";
     }
 }

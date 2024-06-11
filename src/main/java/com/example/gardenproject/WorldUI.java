@@ -18,7 +18,6 @@ public class WorldUI {
     private final ImageView backgroundImageView;
     private final StackPane root;
     private final Image grassImage;
-    private final Image flowerImage;
     private static final int GRID_SIZE = 4;
     private final ImageView[][] flowers;
     private final Button[][] gridButtons;
@@ -27,7 +26,6 @@ public class WorldUI {
     public WorldUI(Scene scene, StackPane gardenStackPane) {
         // Load images
         this.grassImage = getImage("grass.png");
-        this.flowerImage = getImage("sunflower.png");
 
         this.flowers = new ImageView[GRID_SIZE][GRID_SIZE];
         this.gridButtons = new Button[GRID_SIZE][GRID_SIZE];
@@ -87,7 +85,8 @@ public class WorldUI {
         scene.heightProperty().addListener((obs, oldVal, newVal) -> centerBackgroundImage());
     }
 
-    public void showFlower(int i, int j) {
+    public void showFlower(int i, int j, String imagePath) {
+        Image flowerImage = getImage(imagePath);
         if (i < 0 || i >= GRID_SIZE || j < 0 || j >= GRID_SIZE) {
             throw new IllegalArgumentException("Invalid grid position");
         }
@@ -131,7 +130,7 @@ public class WorldUI {
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
                 if (Garden.garden[row][col] != null) {
-                    showFlower(row, col);
+                    showFlower(row, col, Garden.garden[row][col].flowerImage);
                 } else {
                     removeFlower(row, col);
                 }
