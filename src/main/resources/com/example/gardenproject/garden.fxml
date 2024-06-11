@@ -42,7 +42,7 @@
                 <!-- Log area -->
                 <Label fx:id="dayLabel" text="Day: 1"/>
                 <Label fx:id="timerLabel" text="Time to next day: 0 seconds"/>
-                <TextArea fx:id="logTextArea" editable="false" prefHeight="500" prefWidth="300"/>
+                <TextArea fx:id="logTextArea" editable="false" prefHeight="500" prefWidth="400"/>
 
             </VBox>
             <StackPane fx:id="gardenStackPane" prefHeight="600" prefWidth="600"/>

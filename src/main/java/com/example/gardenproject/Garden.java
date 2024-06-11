@@ -49,7 +49,7 @@ public class Garden implements Runnable {
             SystemAPI.date++;
             logger.log(pest_msg.toString());
             //automationSystem();
-            return "End of day processed.";
+            return "End of previous day processed.";
         } else if (x == -1 && y == -1 && action == -1) {
             program_running_flag = false;
             return "Program terminated.";
