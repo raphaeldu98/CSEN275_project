@@ -8,6 +8,8 @@ public class SystemAPI {
     public static int date = 1;
     //automation means if you want to run the program in automation mode to test program's stability
     public static boolean automation = false;
+    //plant_chance is the percentage chance the automation system will seed an unplanted grid at the beginning of a new day
+    public static int plant_chance;
     //pest_chance is the percentage chance a random pest will generate on a plant with no pest, 10 means 10%chance
     public static int pest_chance = 10;
     //water_level should be one of the following three, "rain", "normal", or "drought", affecting the time interval plants require watering

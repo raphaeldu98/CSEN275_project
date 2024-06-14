@@ -2,7 +2,6 @@ package com.example.gardenproject;
 
 public class Plant {
     public String alert_msg;
-    public String log_msg;
     public String plant_type;
     public int health;
     public int water;
@@ -18,7 +17,7 @@ public class Plant {
         pest = null;
         this.fertilizer_type = fertilizer_type;
         fertilizer_level = 0;
-        flowerImage = "sunflower.png";
+        //flowerImage = "sunflower.png";
     }
 
     public String command(int command_id, int x, int y) {

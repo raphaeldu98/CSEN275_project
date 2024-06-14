@@ -143,7 +143,7 @@ public class Garden implements Runnable {
                     }
                 } else {
                     // Randomly generate plant on empty grid
-                    if (new Random().nextInt(100) < 10) { // 10% chance to plant a new one
+                    if (new Random().nextInt(100) < SystemAPI.plant_chance) { // 10% chance to plant a new one
                         commands.add(new int[]{i, j, 0});
                         logger.log("Added command to plant a new plant at " + i + "," + j);
                     }

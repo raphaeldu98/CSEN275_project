@@ -56,6 +56,7 @@ public class GardenController {
 
         if (SystemAPI.automation) {
             Thread automationThread = new Thread(() -> {
+                Thread.sleep(500);
                 while (Garden.program_running_flag) {
                     Garden.automationSystem();
                     try {
