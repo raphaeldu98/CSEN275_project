@@ -139,7 +139,7 @@ public class Plant {
             }
         }
         update_alert_msg();
-        logger.setLogTextArea(this.plant_type+" at (" + x + "," + y + "):\n"+this.alert_msg);
+        logger.updateLogTextArea(this.plant_type+" at (" + x + "," + y + "):\n"+this.alert_msg);
         return ret.toString();
     }
 }
