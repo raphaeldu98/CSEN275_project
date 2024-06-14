@@ -27,7 +27,7 @@ public class Logger {
         String logMessage = "Day " + SystemAPI.date + ": " + message;
         writer.println(logMessage);
         writer.flush();  // Ensure immediate flush after each write
-        updateLogTextArea(logMessage);
+        //updateLogTextArea(logMessage);
     }
 
     private void updateLogTextArea(String message) {

@@ -9,6 +9,7 @@ public class Plant {
     public int fertilizer_type;
     public int fertilizer_level;
     public String flowerImage;
+    public Logger logger = new Logger("garden.log");
 
     public Plant(String plant_type, int fertilizer_type) {
         this.plant_type = plant_type;
@@ -49,6 +50,7 @@ public class Plant {
             ret = plant_type + " at (" + x + "," + y + ") successfully watered.";
         }
         update_alert_msg();
+        logger.setLogTextArea(this.plant_type+" at (" + x + "," + y + "):\n"+this.alert_msg);
         return ret;
     }
 
