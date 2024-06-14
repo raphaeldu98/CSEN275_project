@@ -2,8 +2,8 @@ package com.example.gardenproject;
 
 public class SystemAPI {
     //this is an API for you to change some variables to influence the functioning of the project
-    //day_length is the number of seconds for one round of garden, 20 seconds suggested for human testing and 30 seconds suggested for stability testing
-    public static int day_length = 20;
+    //day_length is the number of seconds for one round of garden, 5 seconds suggested for human testing and 20 seconds suggested for stability testing
+    public static int day_length = 5;
     //keep tracking of how many days have passed in the simulation for log writing
     public static int date = 1;
     //automation means if you want to run the program in automation mode to test program's stability
