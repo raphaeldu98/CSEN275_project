@@ -113,7 +113,7 @@ public class Plant {
         }
         if (healthy_flag) {
             ret.append("Plant is currently very healthy.\n");
-            health++;
+            health = Math.min(health+1, 5);
         }
         ret.append("Plant current HP is: ").append(health).append(".\n");
 

@@ -3,11 +3,11 @@ package com.example.gardenproject;
 public class SystemAPI {
     //this is an API for you to change some variables to influence the functioning of the project
     //day_length is the number of minutes for one round of garden, 1 minute suggested for human testing and 30 minutes suggested for stability testing
-    public static int day_length = 10;
+    public static int day_length = 1;
     //keep tracking of how many days have passed in the simulation for log writing
     public static int date = 1;
     //automation means if you want to run the program in automation mode to test program's stability
-    public static boolean automation = false;
+    public static boolean automation = true;
     //plant_chance is the percentage chance the automation system will seed an unplanted grid at the beginning of a new day
     public static int plant_chance = 10;
     //pest_chance is the percentage chance a random pest will generate on a plant with no pest, 10 means 10%chance

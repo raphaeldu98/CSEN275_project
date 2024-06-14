@@ -30,7 +30,7 @@ public class Logger {
         //updateLogTextArea(logMessage);
     }
 
-    private void updateLogTextArea(String message) {
+    void updateLogTextArea(String message) {
         if (logTextArea != null) {
             Platform.runLater(() -> logTextArea.appendText(message + "\n"));
         }
