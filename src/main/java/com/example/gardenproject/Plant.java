@@ -49,8 +49,6 @@ public class Plant {
             water += 2;
             ret = plant_type + " at (" + x + "," + y + ") successfully watered.";
         }
-        update_alert_msg();
-        logger.setLogTextArea(this.plant_type+" at (" + x + "," + y + "):\n"+this.alert_msg);
         return ret;
     }
 
@@ -78,7 +76,7 @@ public class Plant {
         }
         if (fertilizer_level >= 3) msg.append("Over fertilized!\n");
         if (pest != null) msg.append(pest.Pest_type + " attacking!\n");
-        alert_msg = msg.toString();
+        alert_msg = msg.length()==0? "Healthy.\n" :msg.toString();
     }
 
     public String end_of_Day(int x, int y, StringBuffer pest_msg) {
@@ -140,6 +138,8 @@ public class Plant {
                 }
             }
         }
+        update_alert_msg();
+        logger.setLogTextArea(this.plant_type+" at (" + x + "," + y + "):\n"+this.alert_msg);
         return ret.toString();
     }
 }
